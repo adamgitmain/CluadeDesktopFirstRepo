@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Tasks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #090c15;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .card {
+      width: 520px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0f1424;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ── Date banner ── */
+    .date-banner {
+      background: linear-gradient(105deg, #b87a00 0%, #f0c020 45%, #f5d040 70%, #e8b800 100%);
+      padding: 22px 32px 20px;
+      text-align: center;
+    }
+
+    .date-banner h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 2.6rem;
+      letter-spacing: 0.04em;
+      color: #1a1000;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* ── Task list ── */
+    .task-list {
+      padding: 8px 0 16px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .task-item:last-child {
+      border-bottom: none;
+    }
+
+    .task-item:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .task-num {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #4e6080;
+      letter-spacing: 0.06em;
+      min-width: 20px;
+      user-select: none;
+    }
+
+    .task-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #eef2ff;
+      letter-spacing: 0.01em;
+    }
+
+    .task-text.placeholder {
+      color: #3a4a62;
+      font-weight: 500;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="date-banner">
+    <h1 id="dateDisplay">LOADING…</h1>
+  </div>
+
+  <div class="task-list">
+    <div class="task-item">
+      <span class="task-num">01</span>
+      <span class="task-text placeholder">Task one placeholder</span>
+    </div>
+    <div class="task-item">
+      <span class="task-num">02</span>
+      <span class="task-text placeholder">Task two placeholder</span>
+    </div>
+    <div class="task-item">
+      <span class="task-num">03</span>
+      <span class="task-text placeholder">Task three placeholder</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const days   = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+  const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+  const now = new Date();
+  const dayName   = days[now.getDay()];
+  const monthName = months[now.getMonth()];
+  const date      = now.getDate();
+  const year      = now.getFullYear();
+
+  document.getElementById('dateDisplay').textContent =
+    `${dayName}, ${monthName} ${date}, ${year}`;
+</script>
+
+</body>
+</html>
