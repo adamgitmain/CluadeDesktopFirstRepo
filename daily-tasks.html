@@ -18,14 +18,14 @@
     }
 
     .card {
-      width: min(680px, 95vw);
+      width: 700px;
+      max-width: 95vw;
       border-radius: 12px;
       overflow: hidden;
       background: #0f1424;
       box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
     }
 
-    /* ── Date banner ── */
     .date-banner {
       background: linear-gradient(105deg, #b87a00 0%, #f0c020 45%, #f5d040 70%, #e8b800 100%);
       padding: 22px 32px 20px;
@@ -33,17 +33,18 @@
     }
 
     .date-banner h1 {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: 'Barlow Condensed', Arial Narrow, sans-serif;
       font-weight: 800;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      letter-spacing: 0.04em;
+      font-size: 2.7rem;
+      letter-spacing: 0.03em;
       color: #1a1000;
       text-transform: uppercase;
       line-height: 1;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
     }
 
-    /* ── Task list ── */
     .task-list {
       padding: 8px 0 16px;
     }
@@ -54,7 +55,6 @@
       gap: 20px;
       padding: 20px 32px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      cursor: pointer;
       transition: background 0.15s ease;
     }
 
@@ -122,8 +122,16 @@
   const date      = now.getDate();
   const year      = now.getFullYear();
 
-  document.getElementById('dateDisplay').textContent =
-    `${dayName}, ${monthName} ${date}, ${year}`;
+  const h1 = document.getElementById('dateDisplay');
+  h1.textContent = `${dayName}, ${monthName} ${date}, ${year}`;
+
+  // Auto-shrink font if text overflows the banner
+  const banner = document.querySelector('.date-banner');
+  let size = 2.7;
+  while (h1.scrollWidth > banner.clientWidth - 64 && size > 1) {
+    size -= 0.05;
+    h1.style.fontSize = size + 'rem';
+  }
 </script>
 
 </body>
